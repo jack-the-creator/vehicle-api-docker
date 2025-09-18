@@ -1,0 +1,168 @@
+{
+	"info": {
+		"_postman_id": "4e3554c6-00aa-4b7d-a903-45919c0fd9db",
+		"name": "Vehicle API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28576766"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "// For User Access\n// {\n//     \"username\": \"user\",\n//     \"password\": \"userpass\"\n// }\n\n// For Admin Access \n{\n    \"username\": \"admin\",\n    \"password\": \"adminpass\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{APIURL}}/login_check",
+					"host": [
+						"{{APIURL}}"
+					],
+					"path": [
+						"login_check"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle Makes by Type",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"test.user\",\n    \"password\": \"password\"\n}"
+				},
+				"url": {
+					"raw": "{{APIURL}}/make?type=car",
+					"host": [
+						"{{APIURL}}"
+					],
+					"path": [
+						"make"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "car"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle Details",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{APIURL}}/vehicle/{{vehicleId}}",
+					"host": [
+						"{{APIURL}}"
+					],
+					"path": [
+						"vehicle",
+						"{{vehicleId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Vehicles",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{APIURL}}/vehicles",
+					"host": [
+						"{{APIURL}}"
+					],
+					"path": [
+						"vehicles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Vehicle Spec",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"value\": \"100\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{APIURL}}/vehicle/{{id}}/specs/{{parameter}}",
+					"host": [
+						"{{APIURL}}"
+					],
+					"path": [
+						"vehicle",
+						"{{id}}",
+						"specs",
+						"{{parameter}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NTgxODY1MjAsImV4cCI6MTc1ODE5MDEyMCwicm9sZXMiOlsiUk9MRV9VU0VSIiwiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluIn0.VfCOvMrqn0-itKwC6hytLWJDA61aLSQA-BIdca9REi6rvhjxzXhPokFYnUDpvve4SMZLHBeMWTJeQTALZjSIdA35yXcocuDimWQTizL_sJV6pN4S-XQG7sE-jVnTOPLRqEEE9A1mZdaZVDFgeHWDG9vjUeAYc9LpCY5AP0PlbULUdCmGJZ_21XAV_2z66ZJfidIUd8eLBZkUgQIQw5CJ6bbmdas5gVyi0YRLiTEC8HMlamWfqsAv3dxjloZsLFfN1itNrJOC5-74xucuGL4ZfG155w0FD-fK8V7Yrmax1c2H9GzPiTsF5Cs1PyOqpNOIPdiZwerow97RsrYurbVOXQ",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "APIURL",
+			"value": ""
+		}
+	]
+}

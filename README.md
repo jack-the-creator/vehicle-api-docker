@@ -25,7 +25,7 @@ ___
 
 ## Authentication
 
-1. Download the [Postman Collection]() and goto the `POST /api/login_check` endpoint to get a JWT token. 
+1. Download the [Postman Collection](https://github.com/jack-the-creator/vehicle-api-docker/blob/main/vehicle-api.postman_collection.json) and goto the `POST /api/login_check` endpoint to get a JWT token. 
    1. For User Access: `"username": "user", "password": "userpass"`
    2. For Admin Access: `"username": "admin", "password": "adminpass"` 
 2. Copy the token, goto the `Vehicle API` collection and add the token to the `Authorization` header as `Bearer Token`.
@@ -33,7 +33,7 @@ ___
 ___
 
 ## API Documentation
-You can download the Postman Collection [here]().
+You can download the Postman Collection [here](https://github.com/jack-the-creator/vehicle-api-docker/blob/main/vehicle-api.postman_collection.json).
 
 Click for more details 👇
 
