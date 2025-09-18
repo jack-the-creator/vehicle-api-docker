@@ -23,7 +23,7 @@ build: ## Builds the Docker images
 up: ## Start the docker hub in detached mode (no logs)
 	@$(DOCKER_COMP) up --detach
 
-start: build up ## Build and start the containers
+start: build up composer sf ## Build and start the containers
 
 down: ## Stop the docker hub
 	@$(DOCKER_COMP) down --remove-orphans
@@ -45,7 +45,7 @@ test: ## Start tests with phpunit, pass the parameter "c=" to add options to php
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
 	@$(eval c ?=)
-	@$(COMPOSER) $(c)
+	@$(COMPOSER) install
 
 vendor: ## Install vendors according to the current composer.lock file
 vendor: c=install --prefer-dist --no-dev --no-progress --no-scripts --no-interaction
@@ -55,6 +55,7 @@ vendor: composer
 sf: ## List all Symfony commands or pass the parameter "c=" to run a given command, example: make sf c=about
 	@$(eval c ?=)
 	@$(SYMFONY) $(c)
+	@$(SYMFONY) lexik:jwt:generate-keypair
 
 cc: c=c:c ## Clear the cache
 cc: sf

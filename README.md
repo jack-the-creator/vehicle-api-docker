@@ -2,9 +2,15 @@
 
 ## Getting Started
 
-1. Run `make build` to build fresh images
-2. Run `make up` (detached mode without logs)
-3. Run `make down` to stop the Docker containers
+1. Run `make start` to build and start the project, ready for use.
+
+Other options:
+- Run `make build` to build fresh images
+- Run `make up` (detached mode without logs)
+- Run `make composer` to install all dependencies
+- Run `make sf` to generate lexik JWT key pair
+- Run `make sh` to enter the PHP container and run a shell
+- To stop the Docker containers, run `make down`
 
 ## Testing
 
