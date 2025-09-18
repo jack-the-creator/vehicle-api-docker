@@ -21,22 +21,16 @@ final class VehicleMakeController extends AbstractController
     public function getMakesByVehicleType(Request $request, EntityManagerInterface $manager): JsonResponse
     {
         $typeName = $request->query->get('type');
-        if (!$typeName) {
+        if ($typeName === null || trim($typeName) === '') {
             return $this->json(['error' => 'Vehicle type is required'], 400);
         }
 
-        $type = $manager->getRepository(VehicleType::class)->findOneBy(['name' => strtolower($typeName)]);
-        if (!$type) {
+        $type = $manager->getRepository(VehicleType::class)->findOneByName($typeName);
+        if (!$type instanceof VehicleType) {
             return $this->json(['error' => sprintf('Vehicle type "%s" not found', $typeName)], 404);
         }
 
         $makes = $manager->getRepository(VehicleMake::class)->findByVehicleType($type);
-
-//        $makeDTOs = array_map(fn($make) => new VehicleMakeDTO(
-//            $make->getId(),
-//            $make->getName(),
-//            $make->getCountry()
-//        ), $makes);
 
         return $this->json($makes, context: ['groups' => ['vehicle-make:read']]);
     }

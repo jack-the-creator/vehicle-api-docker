@@ -34,7 +34,7 @@ readonly class VehicleService
     public function getVehicle(int $vehicleId): Vehicle
     {
         $vehicle = $this->manager->getRepository(Vehicle::class)->find($vehicleId);
-        if (!$vehicle) {
+        if (!$vehicle instanceof Vehicle) {
             throw new NotFoundHttpException(sprintf('Vehicle with Id "%s" not found', $vehicleId));
         }
 
@@ -43,8 +43,10 @@ readonly class VehicleService
 
     private function getVehicleSpecParameter(string $specParameterName): VehicleSpecParameter
     {
-        $specParameter = $this->manager->getRepository(VehicleSpecParameter::class)->findOneBy(['name' => strtolower($specParameterName)]);
-        if (!$specParameter) {
+        $specParameter = $this->manager->getRepository(VehicleSpecParameter::class)
+            ->findOneByName($specParameterName);
+
+        if (!$specParameter instanceof VehicleSpecParameter) {
             throw new NotFoundHttpException(sprintf('Spec parameter "%s" not found', $specParameterName));
         }
 
@@ -54,9 +56,9 @@ readonly class VehicleService
     private function getVehicleSpec(Vehicle $vehicle, VehicleSpecParameter $specParameter): VehicleSpec
     {
         $vehicleSpec = $this->manager->getRepository(VehicleSpec::class)
-            ->findOneBy(['vehicle' => $vehicle, 'specParameter' => $specParameter]);
+            ->findOneByVehicleAndSpecParameter($vehicle, $specParameter);
 
-        if (!$vehicleSpec) {
+        if (!$vehicleSpec instanceof VehicleSpec) {
             throw new \RuntimeException(sprintf(
                 'Spec "%s" not set for vehicle "%s"',
                 $specParameter->getName(),
@@ -67,6 +69,15 @@ readonly class VehicleService
         return $vehicleSpec;
     }
 
+    /**
+     * Validate the VehicleSpec's value against the custom constraint validator ValidVehicleSpecValue
+     * and throw an exception if the value is invalid.
+     *
+     * This exception is caught by the ApiExceptionListener and converted to a 400 Bad Request response.
+     *
+     * @param VehicleSpec $vehicleSpec
+     * @return void
+     */
     private function validateVehicleSpecValue(VehicleSpec $vehicleSpec): void
     {
         $errors = $this->validator->validate($vehicleSpec);

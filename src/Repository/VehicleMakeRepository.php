@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Repository;
 
 use App\Entity\VehicleMake;
@@ -19,9 +21,9 @@ class VehicleMakeRepository extends ServiceEntityRepository
 
     /**
      * @param VehicleType $type
-     * @return mixed
+     * @return VehicleMake[]
      */
-    public function findByVehicleType(VehicleType $type)
+    public function findByVehicleType(VehicleType $type): array
     {
         return $this->createQueryBuilder('vm')
             ->join('vm.vehicles', 'vmv')

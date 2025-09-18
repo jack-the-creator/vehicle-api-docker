@@ -38,13 +38,14 @@ final class VehicleController extends AbstractController
         Request        $request,
     ): JsonResponse {
         $value = $request->getPayload()->get('value');
-        if (!$value) {
+        if ($value === null || trim($value) === '') {
             return $this->json(['error' => 'Value is required'], 400);
         }
 
         $vehicleSpec = $this->vehicleService->updateSpec($id, $specParameterName, $value);
 
         return $this->json([
+            'id' => $vehicleSpec->getVehicle()->getId(),
             'vehicle' => $vehicleSpec->getVehicle()->getName(),
             'parameter' => $vehicleSpec->getSpecParameter()->getName(),
             'value' => $vehicleSpec->getValue(),
@@ -52,7 +53,7 @@ final class VehicleController extends AbstractController
         ]);
     }
 
-    #[Route('/vehicle', name: 'all_vehicles', methods: ['GET'])]
+    #[Route('/vehicles', name: 'all_vehicles', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
     public function getAllVehicles(): JsonResponse
     {

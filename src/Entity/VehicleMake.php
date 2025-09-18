@@ -9,6 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VehicleMakeRepository::class)]
 #[ORM\Table(name: 'vehicle_make')]
@@ -34,8 +35,9 @@ class VehicleMake
     #[Groups(['vehicle-make:read', 'vehicle:read'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     #[Groups(['vehicle-make:read', 'vehicle:read'])]
+    #[Assert\NotBlank]
     private ?string $name = null;
 
     /**

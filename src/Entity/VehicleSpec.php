@@ -8,6 +8,7 @@ use App\Repository\VehicleSpecRepository;
 use App\Validator as AcmeAssert;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: VehicleSpecRepository::class)]
 #[ORM\Table(name: 'vehicle_spec')]
@@ -20,8 +21,9 @@ class VehicleSpec
     #[Groups(['vehicle-spec:read'])]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     #[Groups(['vehicle-spec:read'])]
+    #[Assert\NotBlank]
     private ?string $value = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicleSpecs')]
