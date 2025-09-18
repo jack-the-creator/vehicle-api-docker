@@ -1,14 +1,10 @@
 # Backend Code Challenge
 
----
-
 ## Getting Started
 
 1. Run `make build` to build fresh images
 2. Run `make up` (detached mode without logs)
 3. Run `make down` to stop the Docker containers
-
----
 
 ## Testing
 
@@ -21,7 +17,6 @@ If fixtures failed to load:
   php bin/console doctrine:schema:create --env=test
   php bin/console doctrine:fixtures:load --env=test
   ```
-___
 
 ## Authentication
 
@@ -30,7 +25,7 @@ ___
    2. For Admin Access: `"username": "admin", "password": "adminpass"` 
 2. Copy the token, goto the `Vehicle API` collection and add the token to the `Authorization` header as `Bearer Token`.
 3. You can now use the other endpoints to make requests.
-___
+
 
 ## API Documentation
 You can download the Postman Collection [here](https://github.com/jack-the-creator/vehicle-api-docker/blob/main/vehicle-api.postman_collection.json).
@@ -209,7 +204,6 @@ Expected response:
 - Delete Vehicle Spec
 - Create a new Vehicle Spec Parameter (e.g. number of doors)
 
----
 ## Entities
 <details>
 <summary>User</summary>
@@ -280,8 +274,6 @@ You can see this custom validation in action in the `ValidVehicleSpecValue` cons
 - For different locales, we would need to consider adjusting the unit and value of the technical parameters. For example, the top speed may be required in kilometres per hour, not miles per hour.
 - Following from this, we may want to create a lookup table for the different unit types too.
 - When creating new `VehicleSpecParameter`s, we may want to include some validation for actual data types OR create a new lookup table with each data type inside it.
-
-___
 
 ## Services and Event Listeners
 <details>
