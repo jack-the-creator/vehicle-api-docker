@@ -10,7 +10,7 @@
 
 Simply run `make test` to run the tests.
 
-If fixtures failed to load:
+If fixtures failed to load (for whatever reason):
 - Run `make sh` to enter the PHP container and then run:
 - ```
   php bin/console doctrine:database:create --env=test
@@ -303,6 +303,27 @@ It also helped with reducing the complexity and amount of code in the endpoint m
 try/catch blocks altogether!
 
 </details>
+
+## Continuous Integration (CI)
+
+This project uses GitHub Actions to run automated tests and checks on every push to main or on pull requests.
+
+Workflow Overview:
+
+1. Build Docker images for the PHP/Symfony environment.
+2. Start services (PHP, database, Mercure, etc.) using Docker Compose.
+3. Check service reachability to ensure the containers are running.
+4. Create a test database and run migrations to sync the schema.
+5. Load fixtures with sample data for tests.
+6. Run PHPUnit for unit and functional tests.
+7. Validate Doctrine schema to make sure entities match the database.
+
+Benefits
+
+1. Detects failing tests before merging code.
+2. Ensures consistent environment between developers and CI.
+3. Catches database schema mismatches early (this actually caught me when I pushed haha!)
+4. Guarantees that the application works inside Docker.
 
 ## Credits
 
