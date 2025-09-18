@@ -44,13 +44,7 @@ final class VehicleController extends AbstractController
 
         $vehicleSpec = $this->vehicleService->updateSpec($id, $specParameterName, $value);
 
-        return $this->json([
-            'id' => $vehicleSpec->getVehicle()->getId(),
-            'vehicle' => $vehicleSpec->getVehicle()->getName(),
-            'parameter' => $vehicleSpec->getSpecParameter()->getName(),
-            'value' => $vehicleSpec->getValue(),
-            'unit' => $vehicleSpec->getSpecParameter()->getUnit(),
-        ]);
+        return $this->json($vehicleSpec, context: ['groups' => ['vehicle-spec-param:read']]);
     }
 
     #[Route('/vehicles', name: 'all_vehicles', methods: ['GET'])]

@@ -151,10 +151,16 @@ Expected response:
 ```
 {
     "id": 1,
-    "vehicle": "Mustang GT",
-    "parameter": "top_speed",
-    "value": "100",
-    "unit": "mph"
+    "value": "150",
+    "vehicle": {
+        "id": 1
+    },
+    "specParameter": {
+        "id": 1,
+        "name": "top_speed",
+        "unit": "mph",
+        "datatype": "int"
+    }
 }
 ```
 </details>

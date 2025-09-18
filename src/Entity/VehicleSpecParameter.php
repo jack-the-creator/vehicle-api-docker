@@ -29,23 +29,23 @@ class VehicleSpecParameter
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['vehicle-spec:read'])]
+    #[Groups(['vehicle-spec:read', 'vehicle-spec-param:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100, unique: true)]
-    #[Groups(['vehicle-spec:read'])]
+    #[Groups(['vehicle-spec:read', 'vehicle-spec-param:read'])]
     #[Assert\NotBlank]
     private ?string $name = null;
 
     #[ORM\Column(length: 100, nullable: true)]
-    #[Groups(['vehicle-spec:read'])]
+    #[Groups(['vehicle-spec:read', 'vehicle-spec-param:read'])]
     private ?string $unit = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 20)]
-    #[Groups(['vehicle-spec:read'])]
+    #[Groups(['vehicle-spec:read', 'vehicle-spec-param:read'])]
     private ?string $datatype = null;
 
     /**

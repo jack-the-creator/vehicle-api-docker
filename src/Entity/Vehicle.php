@@ -18,7 +18,7 @@ class Vehicle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['vehicle:read'])]
+    #[Groups(['vehicle:read', 'vehicle-spec-param:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]

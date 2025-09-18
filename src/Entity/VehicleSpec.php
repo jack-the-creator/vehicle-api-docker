@@ -18,21 +18,22 @@ class VehicleSpec
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['vehicle-spec:read'])]
+    #[Groups(['vehicle-spec:read', 'vehicle-spec-param:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    #[Groups(['vehicle-spec:read'])]
+    #[Groups(['vehicle-spec:read', 'vehicle-spec-param:read'])]
     #[Assert\NotBlank]
     private ?string $value = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicleSpecs')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['vehicle-spec-param:read'])]
     private ?Vehicle $vehicle = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicleSpecs')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['vehicle-spec:read'])]
+    #[Groups(['vehicle-spec:read', 'vehicle-spec-param:read'])]
     private ?VehicleSpecParameter $specParameter = null;
 
     public function getId(): ?int
