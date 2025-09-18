@@ -323,7 +323,7 @@ This project uses GitHub Actions to run automated tests and checks on every push
 Workflow Overview:
 
 1. Build Docker images for the PHP/Symfony environment.
-2. Start services (PHP, database, Mercure, etc.) using Docker Compose.
+2. Start services (PHP, database etc.) using Docker Compose.
 3. Check service reachability to ensure the containers are running.
 4. Create a test database and run migrations to sync the schema.
 5. Load fixtures with sample data for tests.
