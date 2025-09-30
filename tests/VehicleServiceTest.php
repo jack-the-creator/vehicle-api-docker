@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace App\Tests;
 
 use App\Entity\Vehicle;
-use App\Entity\VehicleMake;
-use App\Entity\VehicleSpec;
 use App\Entity\VehicleSpecParameter;
-use App\Entity\VehicleType;
 use App\Service\VehicleService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -30,33 +27,6 @@ class VehicleServiceTest extends KernelTestCase
         $this->manager = $container->get(EntityManagerInterface::class);
         $this->validator = $container->get(ValidatorInterface::class);
         $this->service = new VehicleService($this->manager, $this->validator);
-
-        /*$vehicleType = new VehicleType();
-        $vehicleType->setName('Test Vehicle Type');
-        $this->manager->persist($vehicleType);
-
-        $vehicleMake = $this->manager->getRepository(VehicleMake::class)
-            ->findOneBy(['name' => VehicleMake::FORD]);
-
-        $vehicleSpecParameter = $this->manager->getRepository(VehicleSpecParameter::class)
-            ->findOneBy(['name' => VehicleSpecParameter::NAME_TOP_SPEED]);
-
-        $vehicle = new Vehicle();
-        $vehicle->setName('Test Vehicle');
-        $vehicle->setYear(2025);
-        $vehicle->setType($vehicleType);
-        $vehicle->setMake($vehicleMake);
-
-        $vehicleSpec = new VehicleSpec();
-        $vehicleSpec->setVehicle($vehicle);
-        $vehicleSpec->setSpecParameter($vehicleSpecParameter);
-        $vehicleSpec->setValue('150');
-        $vehicle->addVehicleSpec($vehicleSpec);
-        $this->manager->persist($vehicleSpec);
-        $this->manager->persist($vehicle);
-
-        $this->manager->flush();*/
-
         $this->vehicle = $this->manager->getRepository(Vehicle::class)->findOneBy(['name' => 'Mustang GT']);
     }
 

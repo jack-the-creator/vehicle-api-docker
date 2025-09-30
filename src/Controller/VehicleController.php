@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -39,7 +40,7 @@ final class VehicleController extends AbstractController
     ): JsonResponse {
         $value = $request->getPayload()->get('value');
         if ($value === null || trim($value) === '') {
-            return $this->json(['error' => 'Value is required'], 400);
+            return $this->json(['error' => 'Value is required'], Response::HTTP_BAD_REQUEST);
         }
 
         $vehicleSpec = $this->vehicleService->updateSpec($id, $specParameterName, $value);

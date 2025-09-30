@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
@@ -22,12 +23,12 @@ final class VehicleMakeController extends AbstractController
     {
         $typeName = $request->query->get('type');
         if ($typeName === null || trim($typeName) === '') {
-            return $this->json(['error' => 'Vehicle type is required'], 400);
+            return $this->json(['error' => 'Vehicle type is required'], Response::HTTP_BAD_REQUEST);
         }
 
         $type = $manager->getRepository(VehicleType::class)->findOneByName($typeName);
         if (!$type instanceof VehicleType) {
-            return $this->json(['error' => sprintf('Vehicle type "%s" not found', $typeName)], 404);
+            return $this->json(['error' => sprintf('Vehicle type "%s" not found', $typeName)], Response::HTTP_NOT_FOUND);
         }
 
         $makes = $manager->getRepository(VehicleMake::class)->findByVehicleType($type);
